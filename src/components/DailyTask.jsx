@@ -6,76 +6,18 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { Button, List, ListItem, ListItemText } from '@mui/material';
 import { connect } from 'react-redux';
+import ModularComp from './ModularComp';
 
-function DailyTask({tasks,addtask,removetask}){
+function DailyTask(){
 
-  const [selected , setSelected] = useState("")
-
-  const dailytasklist = ["Study" , "Exercise" , "Skincare" , "Haircare"]
-
-  const handleAdd = ()=>{
-    if(!setSelected) return
-    addtask(selected)
-    console.log("task added successfuly")
-    setSelected("")
-  }
-
-  // const handleRemove = () =>{
-  //   removetask(index)
-  //   console.log("removed successfully")
-  // }
   return (
-    <Box sx={{ width: 200, margin:'0 auto', paddingTop: 5 }}>
-      <FormControl fullWidth>
-        <InputLabel id="task-select-label">Daily Task</InputLabel>
-        <Select
-          labelId="task-select-label"
-          id="task-select"
-          value={selected}  
-          label="Select Task"
-          onChange={(e)=>setSelected(e.target.value)}
-        >
-         
-          {dailytasklist.map((task,index)=>(
-          <MenuItem key={index} value={task}>{task}</MenuItem> 
-          ))}
-        </Select>
-        <Button onClick={handleAdd}>Add</Button>
-      </FormControl>
-   <Box >
-     <List>
-      {tasks.map((tasks,index)=>(
-        <ListItem key={index}  sx={{
-    bgcolor:"#DE5D83",
-    width:"100%"
-   
-   }}>
-          <ListItemText sx={{
-            color:"white"
-          }}>{tasks}</ListItemText>
-          <Button onClick={()=>removetask(index)} sx={{
-            
-          }}>Remove</Button>
-        </ListItem>
-       
-      ))}
-     </List>
-     </Box>
-      
-    </Box>
+
+  <ModularComp/>
+
   );
 }
 
-const mapStateToProps =(state)=>({
-  tasks:state.tasksData.tasks
-})
-
-const mapDispatchToProps = (dispatch) =>({
-  addtask:(value)=>dispatch({type:"ADD_TASK",payload:value}),
-  removetask:(index)=>dispatch({type:"REMOVE_TASK",payload:index})
-})
-
-export default connect(mapStateToProps,mapDispatchToProps)(DailyTask)
+export default DailyTask
 
 
 

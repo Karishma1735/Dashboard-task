@@ -1,16 +1,26 @@
+import { ADD_TASK, REMOVE_TASK, SELECTED_TASK } from "./actions/actiontypes";
+
+
 const initialstate = {
-  tasks:[]
+  tasks:[],
+  selectedTask:""
 }
 
 const taskreducer = (state=initialstate,action)=>{
     switch(action.type){
-        case "ADD_TASK":
+        case SELECTED_TASK:
+            console.log("task selected")
+            return{
+                ...state,
+                selectedTask:action.payload
+            }
+        case ADD_TASK:
             return {
                 ...state, 
                 tasks:[...state.tasks,action.payload]
             }
 
-        case "REMOVE_TASK":
+        case REMOVE_TASK:
             return{
                 ...state,
                 tasks:state.tasks.filter((_,index)=>index!==action.payload)
