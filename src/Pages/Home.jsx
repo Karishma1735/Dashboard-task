@@ -1,12 +1,13 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import { Box } from '@mui/material';
-import { connect } from 'react-redux';
 import  { useState } from 'react';
 import DailyTask from '../components/DailyTask'
+import WeeklyTask from '../components/WeeklyTask';
+import MonthlyTask from '../components/MonthlyTask';
 
 function Home() {
-  const [tab , activetab] = useState("Daily-Tasks")
+  const [activetab , setactivetab] = useState("Daily")
   return (
     <Box
       sx={{
@@ -17,9 +18,11 @@ function Home() {
         backgroundRepeat: 'no-repeat', 
       }}
     >
-          <Navbar/>
+          <Navbar setactivetab={setactivetab} activetab={activetab}/>
 
-          {tab==="Daily-Tasks" && <DailyTask/>}
+          {activetab==="Daily" && <DailyTask/>}
+          {activetab==="Weekly" && <WeeklyTask/>}
+          {activetab=="Monthly" && <MonthlyTask/>}
 
         {/* {props.} */}
 

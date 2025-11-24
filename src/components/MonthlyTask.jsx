@@ -7,27 +7,22 @@ import FormControl from '@mui/material/FormControl';
 import { Button, List, ListItem, ListItemText } from '@mui/material';
 import { connect } from 'react-redux';
 
-function DailyTask({tasks,addtask,removetask}){
+function MonthlyTask({tasks,addtask,removetask}){
 
   const [selected , setSelected] = useState("")
 
-  const dailytasklist = ["Study" , "Exercise" , "Skincare" , "Haircare"]
+  const weeklytasklist = ["Cleaning","Maintanence","Relaxing","Trip"]
 
   const handleAdd = ()=>{
-    if(!setSelected) return
+    if(selected==="") return alert("Please add task")
     addtask(selected)
     console.log("task added successfuly")
     setSelected("")
   }
-
-  // const handleRemove = () =>{
-  //   removetask(index)
-  //   console.log("removed successfully")
-  // }
   return (
     <Box sx={{ width: 200, margin:'0 auto', paddingTop: 5 }}>
       <FormControl fullWidth>
-        <InputLabel id="task-select-label">Daily Task</InputLabel>
+        <InputLabel id="task-select-label">Monthly Task</InputLabel>
         <Select
           labelId="task-select-label"
           id="task-select"
@@ -36,31 +31,26 @@ function DailyTask({tasks,addtask,removetask}){
           onChange={(e)=>setSelected(e.target.value)}
         >
          
-          {dailytasklist.map((task,index)=>(
+          {weeklytasklist.map((task,index)=>(
           <MenuItem key={index} value={task}>{task}</MenuItem> 
           ))}
         </Select>
         <Button onClick={handleAdd}>Add</Button>
       </FormControl>
-   <Box >
+
      <List>
       {tasks.map((tasks,index)=>(
-        <ListItem key={index}  sx={{
+        <ListItem key={index} sx={{
     bgcolor:"#DE5D83",
-    width:"100%"
    
    }}>
-          <ListItemText sx={{
-            color:"white"
-          }}>{tasks}</ListItemText>
-          <Button onClick={()=>removetask(index)} sx={{
-            
-          }}>Remove</Button>
+          <ListItemText>{tasks}</ListItemText>
+          <Button onClick={()=>removetask(index)}>Remove</Button>
         </ListItem>
        
       ))}
+
      </List>
-     </Box>
       
     </Box>
   );
@@ -75,7 +65,7 @@ const mapDispatchToProps = (dispatch) =>({
   removetask:(index)=>dispatch({type:"REMOVE_TASK",payload:index})
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(DailyTask)
+export default connect(mapStateToProps,mapDispatchToProps)(MonthlyTask)
 
 
 

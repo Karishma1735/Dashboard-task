@@ -1,10 +1,10 @@
-import todoreducer from './redux/reducer'
+import taskreducer from './redux/reducer'
 import { combineReducers } from 'redux';
 import { createStore } from 'redux';
 
 
 const rootReducer = combineReducers({
-    todos:todoreducer
+    tasksData:taskreducer
 })
 
  const store = createStore(rootReducer)

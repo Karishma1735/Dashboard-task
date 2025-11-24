@@ -1,19 +1,25 @@
-// import setActiveTab from "../actions/actiontypes";
-import {SET_ACTIVE_TAB} from '../actions/actiontypes'
-
 const initialstate = {
-    activetab:"Daily-tasks"
+  tasks:[]
 }
 
-const todoreducer = (state=initialstate,action)=>{
+const taskreducer = (state=initialstate,action)=>{
     switch(action.type){
-        case SET_ACTIVE_TAB:
-            return {...state, activetab:action.payload}
+        case "ADD_TASK":
+            return {
+                ...state, 
+                tasks:[...state.tasks,action.payload]
+            }
 
+        case "REMOVE_TASK":
+            return{
+                ...state,
+                tasks:state.tasks.filter((_,index)=>index!==action.payload)
+            }
          default :
-    return state
+    return state;
     }
    
 }
 
-export default todoreducer;
+export default taskreducer;
+

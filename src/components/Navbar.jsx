@@ -12,11 +12,10 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import React, { useState } from 'react';
 
-export default function Navbar() {
+export default function Navbar({activetab,setactivetab}) {
 
 
 const [open , setOpen] = useState(false)
-const [task,setTask] = useState(null)
 const handleclick = () => {
   if (!open) {
     setOpen(true);
@@ -26,11 +25,6 @@ const handleclick = () => {
     console.log("close");
   }
 };
-
-
-const handletask = (task) =>{
-    setTask(task)
-}
 
   return (
     <Box color="black" >
@@ -46,7 +40,7 @@ const handletask = (task) =>{
             <MenuIcon  onClick={handleclick}/>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Dashboard
+            Dashboard / {activetab} Task
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
@@ -60,19 +54,29 @@ const handletask = (task) =>{
             text:"bold"
           }}>
              <ListItem disablePadding sx={{ borderBottom: '1px solid grey' }}>
-          <ListItemButton onClick={() => handletask("Daily Task")}>
-            <ListItemText primary="Daily Task" />
+          <ListItemButton onClick={() =>{ 
+            setactivetab("Daily");
+            setOpen(false)
+          }}>
+            {/* <ListItemButton onClick={handledDailyTab}> */}
+            <ListItemText primary="Daily Task"/>
           </ListItemButton>
-        </ListItem>
+        </ListItem> 
 
         <ListItem disablePadding sx={{ borderBottom: '1px solid grey' }}>
-          <ListItemButton onClick={() => console.log("Weekly Task")}>
+          <ListItemButton onClick={() => {
+            setactivetab("Weekly")
+            setOpen(false)
+            }}>
             <ListItemText primary="Weekly Task" />
           </ListItemButton>
         </ListItem>
 
         <ListItem disablePadding sx={{ borderBottom: '1px grey' }}>
-          <ListItemButton onClick={() => console.log("Monthly Task")}>
+          <ListItemButton onClick={() => {
+            setactivetab("Monthly")
+            setOpen(false)
+            }}>
             <ListItemText primary="Monthly Task" />
           </ListItemButton>
         </ListItem>
